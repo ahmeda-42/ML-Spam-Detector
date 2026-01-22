@@ -5,19 +5,27 @@ from pathlib import Path
 def predict(model, messages):
     preds = model.predict(messages) # 0 for ham, 1 for spam
     probs = model.predict_proba(messages) # 2 columns: [prob of ham, prob of spam]
+    results = []
     for msg, pred, prob in zip(messages, preds, probs):
-        print(f'\n\n"{msg}"')
-        print("\nPrediction:", "SPAM" if pred == 1 else "NOT SPAM")
-        print(f"Confidence: {max(prob) * 100:.3f}%")
+        results.append({
+            "message": msg,
+            "prediction": "spam" if pred == 1 else "not_spam",
+            "confidence": round(max(prob) * 100, 3),
+        })
+    return results
 
 def predict_and_explain(model, messages, top_k: int = 5):
     preds = model.predict(messages) # 0 for ham, 1 for spam
     probs = model.predict_proba(messages) # 2 columns: [prob of ham, prob of spam]
+    results = []
     for msg, pred, prob in zip(messages, preds, probs):
-        print(f'\n\n"{msg}"')
-        print("\nPrediction:", "SPAM" if pred == 1 else "NOT SPAM")
-        print(f"Confidence: {max(prob) * 100:.3f}%")
-        explain(model, msg, top_k)
+        results.append({
+            "message": msg,
+            "prediction": "spam" if pred == 1 else "not_spam",
+            "confidence": round(max(prob) * 100, 3),
+            "explanation": explain(model, msg, top_k),
+        })
+    return results
 
 def explain(model, msg, top_k: int = 5):
     vectorizer = model.named_steps["tfidf"]
@@ -38,9 +46,11 @@ def explain(model, msg, top_k: int = 5):
     total_contribution = np.sum(np.abs(contributions[sorted_indices])) or 1.0
     
     print("\nWhy? (Percentages show relative contributions of words to the model's decision, not absolute probability)")
+    explanation = []
     for i in sorted_indices[:top_k]:
-        word = feature_names[i]
-        value = contributions[i]
-        direction = "increased spam likelihood" if value > 0 else "decreased spam likelihood"
-        percent = (abs(value) / total_contribution) * 100
-        print(f'• "{word}" {direction} by {percent:.2f}%')
+        explanation.append({
+            "word": feature_names[i],
+            "direction": "increased spam likelihood" if contributions[i] > 0 else "decreased spam likelihood",
+            "percent": round((abs(contributions[i]) / total_contribution) * 100, 2),
+        })
+    return explanation
