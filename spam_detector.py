@@ -36,7 +36,6 @@ def download_dataset(data_dir: Path) -> Path:
 
     return dataset_path
 
-
 def load_dataset(dataset_path: Path) -> pd.DataFrame:
     df = pd.read_csv(
         dataset_path,
@@ -55,7 +54,7 @@ def build_pipeline() -> Pipeline:
     return Pipeline(
         steps=[
             ("tfidf", TfidfVectorizer(lowercase=True, stop_words="english")),
-            ("model", MultinomialNB()),
+            ("classifier", MultinomialNB()),
         ]
     )
 
