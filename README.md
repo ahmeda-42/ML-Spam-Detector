@@ -30,6 +30,28 @@ python spam_detector.py train --data-dir data --model-path models/spam_detector.
 python spam_detector.py predict "Free entry in 2 a wkly comp" "Hey, are we still on for lunch?"
 ```
 
+## Docker
+
+Build the image (make sure `artifacts/model.joblib` exists first):
+
+```bash
+docker build -t ml-spam-detector .
+```
+
+Run the API container:
+
+```bash
+docker run --rm -p 8000:8000 ml-spam-detector
+```
+
+Test the API:
+
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Free entry in 2 a wkly comp"}'
+```
+
 ## Notes
 
 - The dataset is downloaded from UCI the first time you train.
