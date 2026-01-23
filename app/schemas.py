@@ -7,9 +7,15 @@ class PredictionRequest(BaseModel):
 class ExplanationItem(BaseModel):
     word: str
     direction: str
-    percent_influence: float
+    percent: float
 
-class PredictionResponse(BaseModel):
+class Prediction(BaseModel):
+    message: str
+    prediction: str
+    confidence: float
+
+class PredictionAndExplanation(BaseModel):
+    message: str
     prediction: str
     confidence: float
     explanation: List[ExplanationItem]

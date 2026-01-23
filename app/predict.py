@@ -2,30 +2,24 @@ import joblib
 import numpy as np
 from pathlib import Path
 
-def predict(model, messages):
-    preds = model.predict(messages) # 0 for ham, 1 for spam
-    probs = model.predict_proba(messages) # 2 columns: [prob of ham, prob of spam]
-    results = []
-    for msg, pred, prob in zip(messages, preds, probs):
-        results.append({
-            "message": msg,
-            "prediction": "spam" if pred == 1 else "not_spam",
-            "confidence": round(max(prob) * 100, 3),
-        })
-    return results
+def predict(model, message):
+    preds = model.predict([message]) # 0 for ham, 1 for spam
+    probs = model.predict_proba([message]) # 2 columns: [prob of ham, prob of spam]
+    return {
+        "message": message,
+        "prediction": "spam" if preds[0] == 1 else "not_spam",
+        "confidence": round(max(probs[0]) * 100, 3),
+    }
 
-def predict_and_explain(model, messages, top_k: int = 5):
-    preds = model.predict(messages) # 0 for ham, 1 for spam
-    probs = model.predict_proba(messages) # 2 columns: [prob of ham, prob of spam]
-    results = []
-    for msg, pred, prob in zip(messages, preds, probs):
-        results.append({
-            "message": msg,
-            "prediction": "spam" if pred == 1 else "not_spam",
-            "confidence": round(max(prob) * 100, 3),
-            "explanation": explain(model, msg, top_k),
-        })
-    return results
+def predict_and_explain(model, message, top_k: int = 5):
+    preds = model.predict([message]) # 0 for ham, 1 for spam
+    probs = model.predict_proba([message]) # 2 columns: [prob of ham, prob of spam]
+    return {
+        "message": message,
+        "prediction": "spam" if preds[0] == 1 else "not_spam",
+        "confidence": round(max(probs[0]) * 100, 3),
+        "explanation": explain(model, message, top_k),
+    }
 
 def explain(model, msg, top_k: int = 5):
     vectorizer = model.named_steps["tfidf"]
@@ -50,7 +44,7 @@ def explain(model, msg, top_k: int = 5):
     for i in sorted_indices[:top_k]:
         explanation.append({
             "word": feature_names[i],
-            "direction": "increased spam likelihood" if contributions[i] > 0 else "decreased spam likelihood",
+            "direction": "spam" if contributions[i] > 0 else "not_spam",
             "percent": round((abs(contributions[i]) / total_contribution) * 100, 2),
         })
     return explanation

@@ -6,18 +6,20 @@ def predict(model, messages):
     preds = model.predict(messages) # 0 for ham, 1 for spam
     probs = model.predict_proba(messages) # 2 columns: [prob of ham, prob of spam]
     for msg, pred, prob in zip(messages, preds, probs):
-        print(f'\n\n"{msg}"')
+        print(f'\n"{msg}"')
         print("\nPrediction:", "SPAM" if pred == 1 else "NOT SPAM")
         print(f"Confidence: {max(prob) * 100:.3f}%")
+        print("\n" + "="*50)
 
 def predict_and_explain(model, messages, top_k: int = 5):
     preds = model.predict(messages) # 0 for ham, 1 for spam
     probs = model.predict_proba(messages) # 2 columns: [prob of ham, prob of spam]
     for msg, pred, prob in zip(messages, preds, probs):
-        print(f'\n\n"{msg}"')
+        print(f'\n"{msg}"')
         print("\nPrediction:", "SPAM" if pred == 1 else "NOT SPAM")
         print(f"Confidence: {max(prob) * 100:.3f}%")
         explain(model, msg, top_k)
+        print("\n" + "="*50)
 
 def explain(model, msg, top_k: int = 5):
     vectorizer = model.named_steps["tfidf"]

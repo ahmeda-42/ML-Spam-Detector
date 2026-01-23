@@ -1,6 +1,6 @@
 from pathlib import Path
 import joblib
-from predict import predict_and_explain
+from predict import predict, predict_and_explain
 
 MODEL_PATH = Path("artifacts/model.joblib")
 MESSAGES = [
