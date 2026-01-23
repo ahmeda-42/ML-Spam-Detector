@@ -19,7 +19,7 @@ def main():
             message = input("\nMessage> ").strip()
 
             if message.lower() in {"exit", "quit"}:
-                print("\n👋 Exiting.")
+                print("\nExiting.")
                 break
             if not message:
                 continue
@@ -39,11 +39,11 @@ def main():
             break
 
         except KeyboardInterrupt:
-            print("\n👋 Exiting.")
+            print("\nExiting.")
             break
 
         except Exception as e:
-            print(f"\n⚠️ Error: {e}\n")
+            print(f"\nError: {e}\n")
 
 if __name__ == "__main__":
     main()
