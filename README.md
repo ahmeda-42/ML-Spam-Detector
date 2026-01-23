@@ -97,10 +97,9 @@ ML-Spam-Detector/
 
 ## Tech Stack
 
-Machine Learning
-- scikit-learn
-- TF-IDF Vectorizer
-- Logistic Regression
+Machine Learning / Data Processing
+- Pandas (data loading, preprocessing, exploration)
+- scikit-learn (TF-IDF vectorization, Logistic Regression)
 
 Backend
 - FastAPI
