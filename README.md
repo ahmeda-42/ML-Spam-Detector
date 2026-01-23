@@ -4,20 +4,26 @@ A machine learning system that classifies/detects SMS spam messages, expose pred
 The model uses logistic regression (scikit-learn) and is TF-IDF vectorizes. It is trained on the UCI SMS Spam Collection dataset and is saved as `artifacts/model.joblib`.
 
 ## Features
+
 Spam classification using:
 - TF-IDF vectorization
 - Logistic Regression (scikit-learn)
+
 Model explainability:
 - Shows which words influenced the prediction
 - Percent-based contribution for interpretability
+
 FastAPI backend:
 - /predict endpoint for real-time inference
+
 Human-friendly CLI client:
 - Pretty-printed predictions and explanations
+
 Pytest test suite:
 - Model tests
 - Prediction logic tests
 - API endpoint tests
+
 Dockerized:
 - One-command containerized deployment
 
@@ -29,7 +35,8 @@ Dockerized:
 Prediction: SPAM
 Confidence: 52.515%
 
-Why? (Percentages show relative contributions of words to the model's decision, not absolute probability)
+Why? (Percentages show relative contributions of words to 
+the model's decision, not absolute probability)
 • "free" increased spam likelihood by 79.99%
 • "phone" increased spam likelihood by 20.01%
 ```
@@ -44,7 +51,7 @@ ML-Spam-Detector/
 │   ├── predict.py          # Prediction + explanation helpers
 │   └── schemas.py          # Pydantic request/response models
 ├── training/               # ML training & evaluation
-│   ├── train.py            # Downloads dataset, trains TF-IDF + Logistic Regression, evaluates, and saves the model
+│   ├── train.py            # Downloads dataset, trains/saves TF-IDF + Logistic Regression model
 │   ├── evaluate.py         # Example batch predictions using the saved model
 │   └── predict.py          # CLI prediction + explanation helpers
 ├── utils/                  # CLI utilities
@@ -127,16 +134,6 @@ Tests cover:
 - Prediction correctness
 - API endpoint behavior
 
-## Local prediction helpers
-
-Run the evaluation script from the `training` directory (it imports
-`training/predict.py` directly):
-
-```bash
-cd training
-python evaluate.py
-```
-
 ## Docker
 
 Build the image (make sure `artifacts/model.joblib` exists first):
@@ -150,3 +147,20 @@ Run the API container:
 ```bash
 docker run --rm -p 8000:8000 ml-spam-detector
 ```
+
+## Tech Stack
+
+Machine Learning
+- scikit-learn
+- TF-IDF Vectorizer
+- Logistic Regression
+
+Backend
+- FastAPI
+- Pydantic
+- Uvicorn
+
+DevOps / SWE
+- Docker
+- Pytest
+- Requests
