@@ -30,6 +30,31 @@ Dockerized:
 
 ## Example Output
 
+### `utils/call_api.py` output
+
+```md
+API Response:
+{
+    "message": "free phone now",
+    "prediction": "spam",
+    "confidence": 52.515,
+    "explanation": [
+        {
+            "word": "free",
+            "direction": "spam",
+            "percent": 79.99
+        },
+        {
+            "word": "phone",
+            "direction": "spam",
+            "percent": 20.01
+        }
+    ]
+}
+```
+
+### `utils/call_api_pretty.py` output
+
 ```md
 "free phone now"
 
