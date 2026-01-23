@@ -150,6 +150,7 @@ python utils/call_api_pretty.py
 ```
 
 Type messages directly into the terminal to see predictions and explanations.
+
 Note: Example responses for both variants were shown above.
 
 ## Running tests
