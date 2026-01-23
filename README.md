@@ -112,7 +112,7 @@ DevOps / SWE
 - Pytest
 - Requests
 
-## Try it!!
+## Try It Yourself!!
 
 ### 1. Setup virtual environment
 
@@ -169,7 +169,7 @@ Type messages directly into the terminal to see predictions and explanations.
 
 Note: Example responses for both variants were shown above.
 
-## Running tests
+## Running Tests
 
 To try out the pytests, run:
 ```bash
