@@ -72,13 +72,14 @@ Why? (Percentages show relative contributions of words to the model's decision, 
 ML-Spam-Detector/
 ├── app/                    # FastAPI application
 │   ├── main.py             # API entry point with `/predict` endpoint
-│   ├── model.py            # Model loading logic
 │   ├── predict.py          # Prediction + explanation helpers
 │   └── schemas.py          # Pydantic request/response models
 ├── model/                  # ML model training & evaluation
-│   ├── train.py            # Downloads dataset, trains/saves TF-IDF + Logistic Regression model
-│   ├── evaluate.py         # Example batch predictions using the saved model
-│   └── predict.py          # CLI prediction + explanation helpers
+│   ├── dataset.py          # Dataset download + loading helpers
+│   ├── train.py            # Trains/saves TF-IDF + Logistic Regression model
+│   ├── evaluate.py         # Evaluates the saved model on the test split
+│   ├── predict.py          # CLI prediction + explanation helpers
+│   └── try_predict.py      # Example batch predictions using the saved model
 ├── utils/                  # CLI utilities
 │   ├── call_api.py         # Simple interactive API CLI client.
 │   └── call_api_pretty.py  # Pretty-printed interactive API CLI client.
@@ -127,10 +128,20 @@ pip install -r requirements.txt
 ```bash
 python model/train.py
 ```
-This downloads the dataset to `data/SMSSpamCollection` (if missing), trains the
-model, prints metrics, and saves the artifact to `artifacts/model.joblib`.
+This downloads the dataset to `data/SMSSpamCollection` (if missing), 
+trains the model, and saves it to `artifacts/model.joblib`.
 
-### 3. Run the API
+
+### 3. Evaluate the model
+
+```bash
+python model/evaluate.py
+```
+This loads the saved model and reports the confusion matrix and
+classification report using the held-out test split.
+
+
+### 4. Run the API
 
 ```bash
 uvicorn app.main:app --reload
@@ -150,7 +161,7 @@ Response fields:
 - `confidence`: percentage probability
 - `explanation`: top contributing words and their impact
 
-### 4. Test the API from the CLI
+### 5. Test the API from the CLI
 
 After starting the API, in a seperate terminal run:
 
