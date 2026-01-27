@@ -69,7 +69,7 @@ Why? (Percentages show relative contributions of words to the model's decision, 
 ## Project Layout
 
 ``` bash
-ML-Spam-Detector/
+ML-Spam-Detector-API/
 ├── app/                    # FastAPI application
 │   ├── main.py             # API entry point with `/predict` endpoint
 │   └── schemas.py          # Pydantic request/response models
@@ -87,9 +87,9 @@ ML-Spam-Detector/
 │   ├── test_api.py
 │   ├── test_model.py
 │   └── test_predict.py
-├── artifacts/              # Containes saved model
+├── artifacts/              # Contains saved model
 │   └── model.joblib
-├── data/                   # Containes UCI SMS Spam Collection dataset
+├── data/                   # Contains UCI SMS Spam Collection dataset
 │   └── SMSSpamCollection
 ├── Dockerfile
 ├── requirements.txt

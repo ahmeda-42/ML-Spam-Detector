@@ -1,7 +1,7 @@
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
-from dataset import download_dataset, load_dataset
-from load_model import load_model
+from model.dataset import download_dataset, load_dataset
+from model.load_model import load_model
 
 def main():
     # Download dataset and get the path

@@ -1,12 +1,11 @@
 import pytest
-from app.predict import predict, predict_and_explain
-from model.load_model import MODEL_PATH, load_model
+from model.predict import predict, predict_and_explain
+from model.load_model import MODEL_PATH
 
 
 @pytest.mark.skipif(not MODEL_PATH.exists(), reason="Model artifact missing.")
 def test_predict_returns_expected_fields_ham():
-    model = load_model()
-    result = predict(model, "hey are you coming later")
+    result = predict("hey are you coming later")
 
     assert result["message"] == "hey are you coming later"
     assert result["prediction"] == "not_spam"
@@ -14,8 +13,7 @@ def test_predict_returns_expected_fields_ham():
 
 @pytest.mark.skipif(not MODEL_PATH.exists(), reason="Model artifact missing.")
 def test_predict_returns_expected_fields_spam():
-    model = load_model()
-    result = predict(model, "win free money now")
+    result = predict("win free money now")
 
     assert result["message"] == "win free money now"
     assert result["prediction"] == "spam"
@@ -24,8 +22,7 @@ def test_predict_returns_expected_fields_spam():
 
 @pytest.mark.skipif(not MODEL_PATH.exists(), reason="Model artifact missing.")
 def test_predict_and_explain_returns_explanation():
-    model = load_model()
-    result = predict_and_explain(model, "win free money now", top_k=3)
+    result = predict_and_explain("win free money now", top_k=3)
 
     assert result["prediction"] == "spam"
     assert 0 <= result["confidence"] <= 100

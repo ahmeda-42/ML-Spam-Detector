@@ -1,4 +1,5 @@
 import requests
+from requests.exceptions import ConnectionError
 
 API_URL = "http://127.0.0.1:8000/predict"
 

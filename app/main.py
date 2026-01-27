@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from model.predict import predict, predict_and_explain
 from app.schemas import PredictionRequest, Prediction, PredictionAndExplanation
-from pathlib import Path
 
 app = FastAPI(title="ML Spam Detector API")
 

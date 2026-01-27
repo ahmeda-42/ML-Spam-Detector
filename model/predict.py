@@ -1,5 +1,5 @@
 import numpy as np
-from load_model import load_model
+from model.load_model import load_model
 
 def predict(message):
     model = load_model()
@@ -30,10 +30,11 @@ def explain(model, msg, top_k: int = 5):
     feature_names = vectorizer.get_feature_names_out()
     weights = classifier.coef_[0]
 
-    contributions = X.toarray()[0] * weights
+    X_array = X.toarray()[0]
+    contributions = X_array * weights
 
     # Only keep words actually in the message
-    nonzero_indices = np.where(X.toarray()[0] > 0)[0]
+    nonzero_indices = np.where(X_array > 0)[0]
 
     # Sort by absolute contribution
     sorted_indices = nonzero_indices[np.argsort(np.abs(contributions[nonzero_indices]))[::-1]]

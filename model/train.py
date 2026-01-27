@@ -1,11 +1,9 @@
-from pathlib import Path
-from urllib.request import urlopen
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 import joblib
-from dataset import download_dataset, load_dataset
+from model.dataset import download_dataset, load_dataset
 
 MODEL_OUT = "artifacts/model.joblib"
 

@@ -1,4 +1,4 @@
-from predict import predict, predict_and_explain
+from model.predict import predict, predict_and_explain
 
 MESSAGES = [
     "Win free money now",
