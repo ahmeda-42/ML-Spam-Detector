@@ -107,7 +107,7 @@ Backend
 - Pydantic
 - Uvicorn
 
-DevOps / SWE
+DevOps / Tooling
 - Docker
 - Pytest
 - Requests
