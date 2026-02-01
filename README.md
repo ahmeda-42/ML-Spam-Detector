@@ -112,6 +112,26 @@ DevOps / SWE
 - Pytest
 - Requests
 
+## Metrics
+
+From the current evaluation run on the held-out test split:
+
+```text
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9603    1.0000    0.9798       242
+           1     1.0000    0.7297    0.8438        37
+
+    accuracy                         0.9642       279
+   macro avg     0.9802    0.8649    0.9118       279
+weighted avg     0.9656    0.9642    0.9617       279
+
+Confusion Matrix:
+[[242   0]
+ [ 10  27]]
+```
+
 ## Try It Yourself!!
 
 ### 1. Setup virtual environment
