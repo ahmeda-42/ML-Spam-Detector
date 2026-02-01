@@ -154,13 +154,13 @@ curl -X POST http://127.0.0.1:8000/predict \
   -d '{"message": "Free entry in 2 a wkly comp"}'
 ```
 
-Note: Instead of running step 4 locally, you can run the service via the Docker section below.
-
 Response fields:
 - `message`: original input
 - `prediction`: `spam` or `not_spam`
 - `confidence`: percentage probability
 - `explanation`: top contributing words and their impact
+
+Note: Instead of running step 4 locally, you can run the service via the Docker section below.
 
 ### 5. Test the API from the CLI
 
